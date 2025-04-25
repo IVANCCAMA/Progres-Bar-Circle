@@ -28,6 +28,7 @@
         margin-top: 10px;
         font-size: 16px;
         font-weight: bold;
+        color: #002b76;
       }
 
       svg {
@@ -44,8 +45,8 @@
       }
 
       .progress-segment {
-        fill: #003399;
-        stroke: #003399; /* Agregar borde del mismo color */
+        fill: #002b76;
+        stroke: #002b76; /* Agregar borde del mismo color */
         stroke-width: 0.5px; /* Ajustar el grosor del borde */
       }
 
@@ -57,12 +58,12 @@
       }
 
       .progress-title {
-        font-size: 12px;
+        font-size: 10px;
         font-weight: bold;
       }
 
       .progress-value {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: bold;
       }
     </style>
@@ -124,7 +125,7 @@
         textContainerCircle.setAttribute("cx", "100");
         textContainerCircle.setAttribute("cy", "100");
         textContainerCircle.setAttribute("r", "60");
-        textContainerCircle.setAttribute("fill", "#e6e6e6"); // Color de fondo del círculo
+        textContainerCircle.setAttribute("fill", "#DADADA");
         svg.appendChild(textContainerCircle);
 
         // Crear el gradiente para el texto
@@ -168,9 +169,9 @@
           "text"
         );
         titleText.setAttribute("x", "100");
-        titleText.setAttribute("y", "85");
+        titleText.setAttribute("y", "94");
         titleText.setAttribute("class", "progress-text progress-title");
-        titleText.setAttribute("fill", "url(#textGradient)"); // Aplicar gradiente
+        titleText.setAttribute("fill", "url(#textGradient)");
         titleText.textContent = "Tu clave dinámica";
         svg.appendChild(titleText);
 
