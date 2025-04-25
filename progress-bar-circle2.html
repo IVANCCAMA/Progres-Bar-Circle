@@ -30,9 +30,6 @@
         height: 160px;
         width: 160px;
         padding: 20px;
-        box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
-          -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
-        border-radius: 50%;
       }
 
       .inner {
@@ -42,24 +39,34 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
-          inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
-          -0.5px -0.5px 0px rgba(255, 255, 255, 1),
-          0.5px 0.5px 0px rgba(0, 0, 0, 0.15),
-          0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+      }
+
+      .text-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(138deg, #e6e6e6, #f9f9f9);
       }
 
       .cotent-texts {
+        width: 100px;
+        height: 100px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        background: #dadada;
+        border-radius: 50%;
       }
 
       .text-title {
         color: #002b76;
         text-align: center;
         font-family: "SF Pro Text";
-        font-size: 12px;
+        font-size: 10px;
         font-style: normal;
         font-weight: 400;
         line-height: 16px;
@@ -68,7 +75,7 @@
       .text-number {
         text-align: center;
         font-family: "SF Pro Text";
-        font-size: 32px;
+        font-size: 26px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
