@@ -63,7 +63,7 @@
         stroke-dashoffset: -0; /* Comienza lleno */
         transform: rotate(-90deg);
         transform-origin: 50% 50%;
-        animation: anim 2s steps(20) forwards; /* Usa steps para dividir en segmentos */
+        animation: anim 60s steps(60) forwards; /* 60 pasos, uno por cada segundo */
       }
 
       @keyframes anim {
@@ -87,7 +87,7 @@
     <div class="skill">
       <div class="outer">
         <div class="inner">
-          <div id="number">100%</div>
+          <div id="number">00:60</div>
         </div>
       </div>
 
@@ -99,8 +99,8 @@
       >
         <defs>
           <linearGradient id="GradientColor">
-            <stop offset="0%" stop-color="#DA22FF" />
-            <stop offset="100%" stop-color="#9733EE" />
+            <stop stop-color="#002B76" />
+            <stop offset="1" stop-color="#004BCC" />
           </linearGradient>
         </defs>
         <circle cx="80" cy="80" r="70" />
@@ -109,19 +109,19 @@
 
     <script>
       let number = document.getElementById("number");
-      let counter = 100; // Inicia en 100
-      let step = 25; // Tamaño del segmento
+      let counter = 60; // Inicia en 60 segundos
 
       let interval = setInterval(() => {
         if (counter <= 0) {
           // Detén el intervalo cuando llegue a 0
           clearInterval(interval);
-          number.innerHTML = "0%";
+          number.innerHTML = "00:00";
         } else {
-          counter -= step; // Decrementa el contador por segmentos
-          number.innerHTML = `${counter}%`;
+          counter--; // Decrementa el contador
+          let seconds = counter.toString().padStart(2, "0"); // Formato 2 dígitos
+          number.innerHTML = `00:${seconds}`;
         }
-      }, 500); // Ajusta el tiempo para que coincida con la animación
+      }, 1000); // Intervalo de 1 segundo
     </script>
   </body>
 </html>
