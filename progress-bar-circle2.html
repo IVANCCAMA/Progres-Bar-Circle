@@ -59,17 +59,19 @@
         fill: none;
         stroke: url(#GradientColor);
         stroke-width: 20px;
-        stroke-dasharray: 450;
-        stroke-dashoffset: -450;
+        stroke-dasharray: 450; /* Longitud total del trazo */
+        stroke-dashoffset: -0; /* Comienza lleno */
         transform: rotate(-90deg);
         transform-origin: 50% 50%;
-        animation: anim 2s linear forwards;
+        animation: anim 2s steps(20) forwards; /* Usa steps para dividir en segmentos */
       }
 
       @keyframes anim {
+        0% {
+          stroke-dashoffset: -0; /* Comienza lleno */
+        }
         100% {
-          /* cambiar aqui a 0 para llenar todo */
-          stroke-dashoffset: -100;
+          stroke-dashoffset: -450; /* Termina vacío */
         }
       }
 
@@ -85,7 +87,7 @@
     <div class="skill">
       <div class="outer">
         <div class="inner">
-          <div id="number">65%</div>
+          <div id="number">100%</div>
         </div>
       </div>
 
@@ -101,22 +103,25 @@
             <stop offset="100%" stop-color="#9733EE" />
           </linearGradient>
         </defs>
-        <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+        <circle cx="80" cy="80" r="70" />
       </svg>
     </div>
 
     <script>
       let number = document.getElementById("number");
-      let counter = 0;
+      let counter = 100; // Inicia en 100
+      let step = 25; // Tamaño del segmento
 
       let interval = setInterval(() => {
-        if (counter == 100) {
+        if (counter <= 0) {
+          // Detén el intervalo cuando llegue a 0
           clearInterval(interval);
+          number.innerHTML = "0%";
         } else {
-          counter += 1;
+          counter -= step; // Decrementa el contador por segmentos
           number.innerHTML = `${counter}%`;
         }
-      }, 20);
+      }, 500); // Ajusta el tiempo para que coincida con la animación
     </script>
   </body>
 </html>
