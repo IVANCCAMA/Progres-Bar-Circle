@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Circular Progress Bar SVG</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .progress-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .timer-text {
+        margin-top: 10px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      svg {
+        width: 250px;
+        height: 250px;
+      }
+
+      .progress-background {
+        fill: white;
+      }
+
+      .progress-inner {
+        fill: white;
+      }
+
+      .progress-segment {
+        fill: #003399;
+        stroke: #003399; /* Agregar borde del mismo color */
+        stroke-width: 0.5px; /* Ajustar el grosor del borde */
+      }
+
+      .progress-text {
+        font-family: Arial, sans-serif;
+        text-anchor: middle;
+        fill: #003399;
+      }
+
+      .progress-title {
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .progress-value {
+        font-size: 24px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Circular Progress Bar SVG</h1>
+    <div class="progress-container">
+      <svg id="progressSvg" viewBox="0 0 200 200">
+        <!-- Los elementos SVG se generarán con JavaScript -->
+      </svg>
+      <div class="timer-text" id="timer">00:60</div>
+    </div>
+
+    <script>
+      // Configuración
+      const totalTime = 60; // Tiempo total en segundos
+      const segmentTime = 5; // Cada segmento representa 5 segundos
+      const totalSegments = totalTime / segmentTime; // 12 segmentos para 60 segundos
+      const dynamicKey = "345876"; // Clave dinámica que se muestra
+      const startProgress = 100; // Progreso inicial (100%)
+      const decreaseRate = 5; // Tasa de disminución del progreso
+
+      // Función para crear un SVG de barra de progreso circular
+      function createProgressSvg() {
+        const svg = document.getElementById("progressSvg");
+
+        // Limpiar SVG existente
+        while (svg.firstChild) {
+          svg.removeChild(svg.firstChild);
+        }
+
+        // Crear círculo de fondo
+        const backgroundCircle = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+        backgroundCircle.setAttribute("cx", "100");
+        backgroundCircle.setAttribute("cy", "100");
+        backgroundCircle.setAttribute("r", "90");
+        backgroundCircle.setAttribute("class", "progress-background");
+        svg.appendChild(backgroundCircle);
+
+        // Crear círculo interior
+        const innerCircle = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+        innerCircle.setAttribute("cx", "100");
+        innerCircle.setAttribute("cy", "100");
+        innerCircle.setAttribute("r", "70");
+        innerCircle.setAttribute("class", "progress-inner");
+        svg.appendChild(innerCircle);
+
+        // Crear texto de título
+        const titleText = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text"
+        );
+        titleText.setAttribute("x", "100");
+        titleText.setAttribute("y", "85");
+        titleText.setAttribute("class", "progress-text progress-title");
+        titleText.textContent = "Tu clave dinámica";
+        svg.appendChild(titleText);
+
+        // Crear texto de valor
+        const valueText = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text"
+        );
+        valueText.setAttribute("x", "100");
+        valueText.setAttribute("y", "115");
+        valueText.setAttribute("class", "progress-text progress-value");
+        valueText.textContent = dynamicKey;
+        svg.appendChild(valueText);
+      }
+
+      // Función para actualizar la barra de progreso
+      function updateProgressSvg(progress) {
+        const svg = document.getElementById("progressSvg");
+
+        // Eliminar segmentos existentes
+        const segments = svg.querySelectorAll(".progress-segment");
+        segments.forEach((segment) => svg.removeChild(segment));
+
+        // Calcular segmentos de progreso
+        const segmentAngle = 360 / totalSegments;
+        const progressSegments = Math.ceil((progress / 100) * totalSegments);
+
+        // Dibujar segmentos de progreso en sentido antihorario
+        for (let i = 0; i < progressSegments; i++) {
+          // Calcular ángulos para este segmento (en grados)
+          const startAngle = -90 - i * segmentAngle;
+          const endAngle = startAngle - segmentAngle; // Eliminar espacio entre segmentos
+
+          // Convertir a radianes
+          const startRad = (startAngle * Math.PI) / 180;
+          const endRad = (endAngle * Math.PI) / 180;
+
+          // Calcular puntos para el path
+          const outerRadius = 90;
+          const innerRadius = 70;
+
+          const outerStartX = 100 + outerRadius * Math.cos(startRad);
+          const outerStartY = 100 + outerRadius * Math.sin(startRad);
+          const outerEndX = 100 + outerRadius * Math.cos(endRad);
+          const outerEndY = 100 + outerRadius * Math.sin(endRad);
+
+          const innerStartX = 100 + innerRadius * Math.cos(endRad);
+          const innerStartY = 100 + innerRadius * Math.sin(endRad);
+          const innerEndX = 100 + innerRadius * Math.cos(startRad);
+          const innerEndY = 100 + innerRadius * Math.sin(startRad);
+
+          // Crear path para el segmento
+          const segment = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+          );
+
+          // Definir el path
+          const d = [
+            `M ${outerStartX} ${outerStartY}`,
+            `A ${outerRadius} ${outerRadius} 0 ${0} 0 ${outerEndX} ${outerEndY}`,
+            `L ${innerStartX} ${innerStartY}`,
+            `A ${innerRadius} ${innerRadius} 0 ${0} 1 ${innerEndX} ${innerEndY}`,
+            "Z",
+          ].join(" ");
+
+          segment.setAttribute("d", d);
+          segment.setAttribute("class", "progress-segment");
+          svg.appendChild(segment);
+        }
+      }
+
+      // Inicializar las variables
+      let currentProgress = startProgress;
+      let seconds = 60;
+
+      // Crear SVG inicial
+      createProgressSvg();
+      updateProgressSvg(currentProgress);
+
+      // Actualizar progreso y tiempo periódicamente
+      setInterval(() => {
+        currentProgress = Math.max(currentProgress - decreaseRate, 0);
+        seconds--;
+
+        if (seconds <= 0) {
+          seconds = 60;
+          currentProgress = startProgress;
+        }
+
+        // Actualizar la barra de progreso
+        updateProgressSvg(currentProgress);
+
+        // Actualizar el texto del tiempo
+        document.getElementById("timer").textContent = `00:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+      }, 1000);
+    </script>
+  </body>
+</html>
