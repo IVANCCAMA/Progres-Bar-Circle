@@ -78,11 +78,11 @@
     <script>
       // Configuración
       const totalTime = 60; // Tiempo total en segundos
-      const segmentTime = 5; // Cada segmento representa 5 segundos
-      const totalSegments = totalTime / segmentTime; // 12 segmentos para 60 segundos
+      const segmentTime = 1;
+      const totalSegments = Math.ceil(totalTime / segmentTime); // Recalcular totalSegments
       const dynamicKey = "345876"; // Clave dinámica que se muestra
       const startProgress = 100; // Progreso inicial (100%)
-      const decreaseRate = 5; // Tasa de disminución del progreso
+      const decreaseRate = 100 / totalTime; // Ajustar la tasa de disminución del progreso
 
       // Función para crear un SVG de barra de progreso circular
       function createProgressSvg() {
@@ -197,7 +197,7 @@
 
       // Inicializar las variables
       let currentProgress = startProgress;
-      let seconds = 60;
+      let seconds = totalTime;
 
       // Crear SVG inicial
       createProgressSvg();
@@ -209,7 +209,7 @@
         seconds--;
 
         if (seconds <= 0) {
-          seconds = 60;
+          seconds = totalTime;
           currentProgress = startProgress;
         }
 
