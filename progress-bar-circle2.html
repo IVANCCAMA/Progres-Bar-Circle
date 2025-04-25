@@ -21,39 +21,29 @@
       }
 
       .skill {
-        width: 160px;
-        height: 160px;
+        width: 220px;
+        height: 220px;
         position: relative;
       }
 
       .outer {
-        height: 160px;
-        width: 160px;
+        height: 220px;
+        width: 220px;
         padding: 20px;
       }
 
       .inner {
-        height: 120px;
-        width: 120px;
+        height: 180px;
+        width: 180px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-
-      .text-circle {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(138deg, #e6e6e6, #f9f9f9);
       }
 
       .cotent-texts {
-        width: 100px;
-        height: 100px;
+        width: 160px;
+        height: 160px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -66,7 +56,7 @@
         color: #002b76;
         text-align: center;
         font-family: "SF Pro Text";
-        font-size: 10px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 400;
         line-height: 16px;
@@ -75,7 +65,7 @@
       .text-number {
         text-align: center;
         font-family: "SF Pro Text";
-        font-size: 26px;
+        font-size: 32px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
@@ -103,7 +93,7 @@
         fill: none;
         stroke: url(#GradientColor);
         stroke-width: 20px;
-        stroke-dasharray: 450; /* Longitud total del trazo */
+        stroke-dasharray: 629; /* Longitud total del trazo para r=100 */
         stroke-dashoffset: -0; /* Comienza lleno */
         transform: rotate(-90deg);
         transform-origin: 50% 50%;
@@ -115,7 +105,7 @@
           stroke-dashoffset: -0; /* Comienza lleno */
         }
         100% {
-          stroke-dashoffset: -450; /* Termina vacío */
+          stroke-dashoffset: -629; /* Termina vacío */
         }
       }
 
@@ -143,8 +133,8 @@
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
-        width="160px"
-        height="160px"
+        width="220px"
+        height="220px"
       >
         <defs>
           <linearGradient id="GradientColor">
@@ -152,7 +142,7 @@
             <stop offset="1" stop-color="#004BCC" />
           </linearGradient>
         </defs>
-        <circle cx="80" cy="80" r="70" />
+        <circle cx="110" cy="110" r="100" />
       </svg>
     </div>
 
