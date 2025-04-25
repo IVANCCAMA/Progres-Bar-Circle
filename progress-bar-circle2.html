@@ -60,13 +60,16 @@
         stroke: url(#GradientColor);
         stroke-width: 20px;
         stroke-dasharray: 450;
-        stroke-dashoffset: 450;
+        stroke-dashoffset: -450;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
         animation: anim 2s linear forwards;
       }
 
       @keyframes anim {
         100% {
-          stroke-dashoffset: 157.5;
+          /* cambiar aqui a 0 para llenar todo */
+          stroke-dashoffset: -100;
         }
       }
 
@@ -106,14 +109,14 @@
       let number = document.getElementById("number");
       let counter = 0;
 
-      setInterval(() => {
-        if (counter == 65) {
-          clearInterval();
+      let interval = setInterval(() => {
+        if (counter == 100) {
+          clearInterval(interval);
         } else {
           counter += 1;
           number.innerHTML = `${counter}%`;
         }
-      }, 30);
+      }, 20);
     </script>
   </body>
 </html>
